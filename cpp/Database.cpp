@@ -3,9 +3,11 @@
 #include <fstream>
 #include <iostream>
 
+using namespace std;
+
 using json = nlohmann::json;
 
-void Database::saveToFile(const std::string& filename) {
+void Database::saveToFile(const string& filename) {
     json j;
     for (auto const& [name, arr] : arrays) {
         json a = json::array();
@@ -26,30 +28,30 @@ void Database::saveToFile(const std::string& filename) {
     }
     for (auto const& [name, t] : trees) j["tree"][name] = t.getData();
 
-    std::ofstream f(filename);
+    ofstream f(filename);
     if (f.is_open()) { f << j.dump(4); f.close(); }
 }
 
-void Database::loadFromFile(const std::string& filename) {
-    std::ifstream f(filename);
+void Database::loadFromFile(const string& filename) {
+    ifstream f(filename);
     if (!f.is_open()) return;
     try {
         json j; f >> j;
         if (j.contains("array")) for (auto& el : j["array"].items()) {
-            std::vector<std::string> v = el.value().get<std::vector<std::string>>();
+            vector<string> v = el.value().get<vector<string>>();
             arrays[el.key()].set_from_array(v.data(), v.size());
         }
-        if (j.contains("forward_list")) for (auto& el : j["forward_list"].items()) fLists[el.key()].setData(el.value().get<std::vector<std::string>>());
-        if (j.contains("doubly_list")) for (auto& el : j["doubly_list"].items()) dLists[el.key()].setData(el.value().get<std::vector<std::string>>());
+        if (j.contains("forward_list")) for (auto& el : j["forward_list"].items()) fLists[el.key()].setData(el.value().get<vector<string>>());
+        if (j.contains("doubly_list")) for (auto& el : j["doubly_list"].items()) dLists[el.key()].setData(el.value().get<vector<string>>());
         if (j.contains("stack")) for (auto& el : j["stack"].items()) {
-            std::vector<std::string> v = el.value().get<std::vector<std::string>>();
+            vector<string> v = el.value().get<vector<string>>();
             for (auto& s : v) stacks[el.key()].push(s);
         }
         if (j.contains("queue")) for (auto& el : j["queue"].items()) {
-            std::vector<std::string> v = el.value().get<std::vector<std::string>>();
+            vector<string> v = el.value().get<vector<string>>();
             for (auto& s : v) queues[el.key()].push(s);
         }
-        if (j.contains("tree")) for (auto& el : j["tree"].items()) trees[el.key()].setData(el.value().get<std::vector<int>>());
-    } catch (std::exception& e) { std::cerr << "Load error: " << e.what() << std::endl; }
+        if (j.contains("tree")) for (auto& el : j["tree"].items()) trees[el.key()].setData(el.value().get<vector<int>>());
+    } catch (exception& e) { cerr << "Load error: " << e.what() << endl; }
     f.close();
 }

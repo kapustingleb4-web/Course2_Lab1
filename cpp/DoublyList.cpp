@@ -1,27 +1,29 @@
 #include "DoublyList.hpp"
 #include <stdexcept>
 
+using namespace std;
+
 DoublyList::DoublyList() : head(nullptr), tail(nullptr), size(0) {}
 DoublyList::~DoublyList() {
     while (head) { Node* t = head; head = head->next; delete t; }
 }
 
-void DoublyList::push_front(const std::string& val) {
+void DoublyList::push_front(const string& val) {
     Node* n = new Node(val);
     if (!head) { head = tail = n; }
     else { n->next = head; head->prev = n; head = n; }
     size++;
 }
 
-void DoublyList::push_back(const std::string& val) {
+void DoublyList::push_back(const string& val) {
     Node* n = new Node(val);
     if (!tail) { head = tail = n; }
     else { n->prev = tail; tail->next = n; tail = n; }
     size++;
 }
 
-void DoublyList::insert_before_at(int index, const std::string& val) {
-    if (index < 0 || index > size) throw std::out_of_range("Index out of range");
+void DoublyList::insert_before_at(int index, const string& val) {
+    if (index < 0 || index > size) throw out_of_range("Index out of range");
     if (index == 0) { push_front(val); return; }
     Node* cur = head;
     for (int i = 0; i < index; ++i) cur = cur->next;
@@ -30,8 +32,8 @@ void DoublyList::insert_before_at(int index, const std::string& val) {
     cur->prev->next = n; cur->prev = n; size++;
 }
 
-void DoublyList::insert_after_at(int index, const std::string& val) {
-    if (index < 0 || index >= size) throw std::out_of_range("Index out of range");
+void DoublyList::insert_after_at(int index, const string& val) {
+    if (index < 0 || index >= size) throw out_of_range("Index out of range");
     if (index == size - 1) { push_back(val); return; }
     Node* cur = head;
     for (int i = 0; i < index; ++i) cur = cur->next;
@@ -40,7 +42,7 @@ void DoublyList::insert_after_at(int index, const std::string& val) {
     cur->next->prev = n; cur->next = n; size++;
 }
 
-void DoublyList::insert_before_value(const std::string& target, const std::string& val) {
+void DoublyList::insert_before_value(const string& target, const string& val) {
     Node* cur = head;
     while (cur && cur->data != target) cur = cur->next;
     if (!cur) return;
@@ -50,7 +52,7 @@ void DoublyList::insert_before_value(const std::string& target, const std::strin
     cur->prev->next = n; cur->prev = n; size++;
 }
 
-void DoublyList::insert_after_value(const std::string& target, const std::string& val) {
+void DoublyList::insert_after_value(const string& target, const string& val) {
     Node* cur = head;
     while (cur && cur->data != target) cur = cur->next;
     if (!cur) return;
@@ -75,7 +77,7 @@ void DoublyList::pop_back() {
 }
 
 void DoublyList::remove_at(int index) {
-    if (index < 0 || index >= size) throw std::out_of_range("Index out of range");
+    if (index < 0 || index >= size) throw out_of_range("Index out of range");
     if (index == 0) { pop_front(); return; }
     if (index == size - 1) { pop_back(); return; }
     Node* cur = head;
@@ -84,7 +86,7 @@ void DoublyList::remove_at(int index) {
     delete cur; size--;
 }
 
-void DoublyList::remove_by_value(const std::string& val) {
+void DoublyList::remove_by_value(const string& val) {
     Node* cur = head;
     while (cur && cur->data != val) cur = cur->next;
     if (!cur) return;
@@ -94,7 +96,7 @@ void DoublyList::remove_by_value(const std::string& val) {
     delete cur; size--;
 }
 
-void DoublyList::remove_all_by_value(const std::string& val) {
+void DoublyList::remove_all_by_value(const string& val) {
     Node* cur = head;
     while (cur) {
         if (cur->data == val) {
@@ -113,7 +115,7 @@ void DoublyList::remove_all_by_value(const std::string& val) {
     }
 }
 
-void DoublyList::remove_before_value(const std::string& target) {
+void DoublyList::remove_before_value(const string& target) {
     Node* cur = head;
     while (cur && cur->data != target) cur = cur->next;
     if (!cur || !cur->prev) return;
@@ -122,7 +124,7 @@ void DoublyList::remove_before_value(const std::string& target) {
     cur->prev = t->prev;
     delete t; size--;
 }
-void DoublyList::remove_after_value(const std::string& target) {
+void DoublyList::remove_after_value(const string& target) {
     Node* cur = head;
     while (cur && cur->data != target) cur = cur->next;
     if (!cur || !cur->next) return;
@@ -132,7 +134,7 @@ void DoublyList::remove_after_value(const std::string& target) {
     delete t; size--;
 }
 
-bool DoublyList::find(const std::string& val) const {
+bool DoublyList::find(const string& val) const {
     Node* cur = head;
     while (cur) { if (cur->data == val) return true; cur = cur->next; }
     return false;
@@ -142,17 +144,17 @@ int DoublyList::getSize() const { return size; }
 
 void DoublyList::print() const {
     Node* cur = head;
-    while (cur) { std::cout << cur->data << " <-> "; cur = cur->next; }
-    std::cout << "NULL";
+    while (cur) { cout << cur->data << " <-> "; cur = cur->next; }
+    cout << "NULL";
 }
 
-std::vector<std::string> DoublyList::getData() const {
-    std::vector<std::string> res; Node* cur = head;
+vector<string> DoublyList::getData() const {
+    vector<string> res; Node* cur = head;
     while (cur) { res.push_back(cur->data); cur = cur->next; }
     return res;
 }
 
-void DoublyList::setData(const std::vector<std::string>& d) {
+void DoublyList::setData(const vector<string>& d) {
     while (head) { Node* t = head; head = head->next; delete t; }
     head = tail = nullptr; size = 0;
     for (const auto& v : d) push_back(v);

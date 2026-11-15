@@ -3,6 +3,8 @@
 #include <stdexcept>
 #include <iostream>
 
+using namespace std;
+
 AVLTree::AVLTree() : root(nullptr) {}
 AVLTree::~AVLTree() { clear(root); }
 
@@ -16,7 +18,7 @@ void AVLTree::clear(Node* node) {
 int AVLTree::height(Node* node) const { return node ? node->height : 0; }
 
 void AVLTree::updateHeight(Node* node) {
-    if (node) node->height = 1 + std::max(height(node->left), height(node->right));
+    if (node) node->height = 1 + max(height(node->left), height(node->right));
 }
 
 int AVLTree::getBalance(Node* node) const {
@@ -106,11 +108,11 @@ bool AVLTree::search(Node* node, int key) const {
 void AVLTree::inorder(Node* node) const {
     if (!node) return;
     inorder(node->left);
-    std::cout << node->key << " ";
+    cout << node->key << " ";
     inorder(node->right);
 }
 
-void AVLTree::toVector(Node* node, std::vector<int>& v) const {
+void AVLTree::toVector(Node* node, vector<int>& v) const {
     if (!node) return;
     toVector(node->left, v);
     v.push_back(node->key);
@@ -135,9 +137,9 @@ void AVLTree::printTreeRec(Node* node, int space) const {
     printTreeRec(node->right, space);
 
     // Печатаем узел
-    std::cout << "\n";
-    for (int i = 5; i < space; i++) std::cout << " ";
-    std::cout << node->key << "(h:" << node->height << ")";
+    cout << "\n";
+    for (int i = 5; i < space; i++) cout << " ";
+    cout << node->key << "(h:" << node->height << ")";
 
     // Потом левое
     printTreeRec(node->left, space);
@@ -145,19 +147,19 @@ void AVLTree::printTreeRec(Node* node, int space) const {
 
 void AVLTree::printTree() const {
     if (!root) {
-        std::cout << "(empty tree)";
+        cout << "(empty tree)";
         return;
     }
     printTreeRec(root, 0);
 }
 
-std::vector<int> AVLTree::getData() const {
-    std::vector<int> res;
+vector<int> AVLTree::getData() const {
+    vector<int> res;
     toVector(root, res);
     return res;
 }
 
-void AVLTree::setData(const std::vector<int>& d) {
+void AVLTree::setData(const vector<int>& d) {
     clear(root);
     root = nullptr;
     for (int v : d) root = insert(root, v);

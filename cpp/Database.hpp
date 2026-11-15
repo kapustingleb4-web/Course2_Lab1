@@ -9,15 +9,17 @@
 #include "MyQueue.hpp"
 #include "AVLTree.hpp"
 
-struct Database {
-    std::map<std::string, MyArray> arrays;
-    std::map<std::string, ForwardList> fLists;
-    std::map<std::string, DoublyList> dLists;
-    std::map<std::string, MyStack> stacks;
-    std::map<std::string, MyQueue> queues;
-    std::map<std::string, AVLTree> trees;
+using namespace std;
 
-    void saveToFile(const std::string& filename);
-    void loadFromFile(const std::string& filename);
+struct Database {
+    map<string, MyArray> arrays;
+    map<string, ForwardList> fLists;
+    map<string, DoublyList> dLists;
+    map<string, MyStack> stacks;
+    map<string, MyQueue> queues;
+    map<string, AVLTree> trees;
+
+    void saveToFile(const string& filename);
+    void loadFromFile(const string& filename);
 };
 #endif

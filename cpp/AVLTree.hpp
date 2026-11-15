@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 class AVLTree {
 private:
     struct Node {
@@ -26,7 +28,7 @@ private:
     bool search(Node* root, int key) const;
     void inorder(Node* root) const;
     void clear(Node* root);
-    void toVector(Node* root, std::vector<int>& v) const;
+    void toVector(Node* root, vector<int>& v) const;
     
     // Новый вспомогательный метод для рисования
     void printTreeRec(Node* node, int space) const; 
@@ -41,7 +43,7 @@ public:
     void print() const;       // Старый вывод (просто числа: 10 20 30)
     void printTree() const;   // НОВЫЙ вывод (красивая ёлочка)
     
-    std::vector<int> getData() const;
-    void setData(const std::vector<int>& d);
+    vector<int> getData() const;
+    void setData(const vector<int>& d);
 };
 #endif

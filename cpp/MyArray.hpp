@@ -3,9 +3,11 @@
 #include <string>
 #include <iostream>
 
+using namespace std;
+
 class MyArray {
 protected:
-    std::string* data;
+    string* data;
     int size;
     int capacity;
     void resize(int new_capacity);
@@ -14,16 +16,16 @@ public:
     MyArray();
     ~MyArray();
 
-    void push_back(const std::string& val);
-    void insert_at(int index, const std::string& val);
+    void push_back(const string& val);
+    void insert_at(int index, const string& val);
     void remove_at(int index);
-    void remove_by_value(const std::string& val);
-    void update_at(int index, const std::string& val);
-    std::string get(int index) const;
+    void remove_by_value(const string& val);
+    void update_at(int index, const string& val);
+    string get(int index) const;
     int length() const;
     void print() const;
     
-    std::string* get_raw_data() const { return data; }
-    void set_from_array(const std::string* arr, int count);
+    string* get_raw_data() const { return data; }
+    void set_from_array(const string* arr, int count);
 };
 #endif

@@ -2,10 +2,12 @@
 #define MYQUEUE_HPP
 #include "MyArray.hpp"
 
+using namespace std;
+
 class MyQueue : public MyArray {
 public:
-    void push(const std::string& val);
-    std::string pop();
+    void push(const string& val);
+    string pop();
     void print() const;
 };
 #endif
