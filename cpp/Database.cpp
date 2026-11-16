@@ -23,7 +23,7 @@ void Database::saveToFile(const string& filename) {
     }
     for (auto const& [name, q] : queues) {
         json a = json::array();
-        for (int i = 0; i < q.length(); ++i) a.push_back(q.get(i));
+        for (auto& v : q.getData()) a.push_back(v);
         j["queue"][name] = a;
     }
     for (auto const& [name, t] : trees) j["tree"][name] = t.getData();

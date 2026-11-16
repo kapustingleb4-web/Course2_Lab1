@@ -1,17 +1,62 @@
 #include "MyQueue.hpp"
+#include <iostream>
 #include <stdexcept>
 
 using namespace std;
 
-void MyQueue::push(const string& val) { push_back(val); }
+MyQueue::MyQueue() : head(nullptr), tail(nullptr), size(0) {}
+
+MyQueue::MyQueue(const MyQueue& other) : head(nullptr), tail(nullptr), size(0) {
+    for (Node* cur = other.head; cur; cur = cur->next) push(cur->val);
+}
+
+MyQueue& MyQueue::operator=(const MyQueue& other) {
+    if (this != &other) {
+        clear();
+        for (Node* cur = other.head; cur; cur = cur->next) push(cur->val);
+    }
+    return *this;
+}
+
+MyQueue::~MyQueue() { clear(); }
+
+void MyQueue::push(const string& val) {
+    Node* n = new Node(val);
+    if (tail) tail->next = n;
+    else head = n;
+    tail = n;
+    size++;
+}
 
 string MyQueue::pop() {
-    if (size == 0) throw runtime_error("Queue is empty");
-    string v = data[0];
-    remove_at(0);
+    if (!head) throw runtime_error("Queue is empty");
+    Node* n = head;
+    string v = n->val;
+    head = head->next;
+    if (!head) tail = nullptr;
+    delete n;
+    size--;
     return v;
 }
 
+int MyQueue::length() const { return size; }
+
+vector<string> MyQueue::getData() const {
+    vector<string> v;
+    for (Node* cur = head; cur; cur = cur->next) v.push_back(cur->val);
+    return v;
+}
+
+void MyQueue::clear() {
+    while (head) {
+        Node* n = head;
+        head = head->next;
+        delete n;
+    }
+    tail = nullptr;
+    size = 0;
+}
+
 void MyQueue::print() const {
-    for (int i = 0; i < size; ++i) cout << data[i] << " ";
+    for (Node* cur = head; cur; cur = cur->next) cout << cur->val << " ";
 }
