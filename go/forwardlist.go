@@ -35,38 +35,6 @@ func (l *ForwardList) PushBack(val string) {
 	l.size++
 }
 
-func (l *ForwardList) InsertBeforeAt(index int, val string) error {
-	if index < 0 || index > l.size {
-		return errors.New("index out of range")
-	}
-	if index == 0 {
-		l.PushFront(val)
-		return nil
-	}
-	cur := l.head
-	for i := 0; i < index-1; i++ {
-		cur = cur.next
-	}
-	n := &fNode{data: val, next: cur.next}
-	cur.next = n
-	l.size++
-	return nil
-}
-
-func (l *ForwardList) InsertAfterAt(index int, val string) error {
-	if index < 0 || index >= l.size {
-		return errors.New("index out of range")
-	}
-	cur := l.head
-	for i := 0; i < index; i++ {
-		cur = cur.next
-	}
-	n := &fNode{data: val, next: cur.next}
-	cur.next = n
-	l.size++
-	return nil
-}
-
 func (l *ForwardList) InsertBeforeValue(target string, val string) {
 	if l.head == nil {
 		return
@@ -121,22 +89,6 @@ func (l *ForwardList) PopBack() error {
 		cur = cur.next
 	}
 	cur.next = nil
-	l.size--
-	return nil
-}
-
-func (l *ForwardList) RemoveAt(index int) error {
-	if index < 0 || index >= l.size {
-		return errors.New("index out of range")
-	}
-	if index == 0 {
-		return l.PopFront()
-	}
-	cur := l.head
-	for i := 0; i < index-1; i++ {
-		cur = cur.next
-	}
-	cur.next = cur.next.next
 	l.size--
 	return nil
 }

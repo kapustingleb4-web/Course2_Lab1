@@ -43,44 +43,6 @@ func (l *DoublyList) PushBack(val string) {
 	l.size++
 }
 
-func (l *DoublyList) InsertBeforeAt(index int, val string) error {
-	if index < 0 || index > l.size {
-		return errors.New("index out of range")
-	}
-	if index == 0 {
-		l.PushFront(val)
-		return nil
-	}
-	cur := l.head
-	for i := 0; i < index; i++ {
-		cur = cur.next
-	}
-	n := &dNode{data: val, prev: cur.prev, next: cur}
-	cur.prev.next = n
-	cur.prev = n
-	l.size++
-	return nil
-}
-
-func (l *DoublyList) InsertAfterAt(index int, val string) error {
-	if index < 0 || index >= l.size {
-		return errors.New("index out of range")
-	}
-	if index == l.size-1 {
-		l.PushBack(val)
-		return nil
-	}
-	cur := l.head
-	for i := 0; i < index; i++ {
-		cur = cur.next
-	}
-	n := &dNode{data: val, next: cur.next, prev: cur}
-	cur.next.prev = n
-	cur.next = n
-	l.size++
-	return nil
-}
-
 func (l *DoublyList) InsertBeforeValue(target string, val string) {
 	cur := l.head
 	for cur != nil && cur.data != target {
@@ -141,26 +103,6 @@ func (l *DoublyList) PopBack() error {
 	} else {
 		l.head = nil
 	}
-	l.size--
-	return nil
-}
-
-func (l *DoublyList) RemoveAt(index int) error {
-	if index < 0 || index >= l.size {
-		return errors.New("index out of range")
-	}
-	if index == 0 {
-		return l.PopFront()
-	}
-	if index == l.size-1 {
-		return l.PopBack()
-	}
-	cur := l.head
-	for i := 0; i < index; i++ {
-		cur = cur.next
-	}
-	cur.prev.next = cur.next
-	cur.next.prev = cur.prev
 	l.size--
 	return nil
 }

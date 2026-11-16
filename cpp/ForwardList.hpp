@@ -23,8 +23,6 @@ public:
     // Базовые
     void push_front(const string& val);
     void push_back(const string& val);
-    void insert_before_at(int index, const string& val);
-    void insert_after_at(int index, const string& val);
     
     // НОВЫЕ: по значению
     void insert_before_value(const string& target, const string& val);
@@ -32,7 +30,6 @@ public:
     
     void pop_front();
     void pop_back();
-    void remove_at(int index);
     void remove_by_value(const string& val);
     
     // НОВЫЕ: удаление

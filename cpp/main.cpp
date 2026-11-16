@@ -58,13 +58,10 @@ int main(int argc, char* argv[]) {
         // ОДНОСВЯЗНЫЙ СПИСОК
         else if (cmd == "FPUSH_FRONT") { db.fLists[name].push_front(val); db.saveToFile(filename); }
         else if (cmd == "FPUSH_BACK") { db.fLists[name].push_back(val); db.saveToFile(filename); }
-        else if (cmd == "FINSERT_BEFORE_AT") { db.fLists[name].insert_before_at(stoi(val), val2); db.saveToFile(filename); }
-        else if (cmd == "FINSERT_AFTER_AT") { db.fLists[name].insert_after_at(stoi(val), val2); db.saveToFile(filename); }
         else if (cmd == "FINSERT_BEFORE_VAL") { db.fLists[name].insert_before_value(val, val2); db.saveToFile(filename); }
         else if (cmd == "FINSERT_AFTER_VAL") { db.fLists[name].insert_after_value(val, val2); db.saveToFile(filename); }
         else if (cmd == "FPOP_FRONT") { db.fLists[name].pop_front(); db.saveToFile(filename); }
         else if (cmd == "FPOP_BACK") { db.fLists[name].pop_back(); db.saveToFile(filename); }
-        else if (cmd == "FDEL_AT") { db.fLists[name].remove_at(stoi(val)); db.saveToFile(filename); }
         else if (cmd == "FDEL_VALUE") { db.fLists[name].remove_by_value(val); db.saveToFile(filename); }
         else if (cmd == "FDEL_ALL") { db.fLists[name].remove_all_by_value(val); db.saveToFile(filename); }
         else if (cmd == "FDEL_BEFORE") { db.fLists[name].remove_before_value(val); db.saveToFile(filename); }
@@ -74,13 +71,10 @@ int main(int argc, char* argv[]) {
         // ДВУСВЯЗНЫЙ СПИСОК
         else if (cmd == "LPUSH_FRONT") { db.dLists[name].push_front(val); db.saveToFile(filename); }
         else if (cmd == "LPUSH_BACK") { db.dLists[name].push_back(val); db.saveToFile(filename); }
-        else if (cmd == "LINSERT_BEFORE_AT") { db.dLists[name].insert_before_at(stoi(val), val2); db.saveToFile(filename); }
-        else if (cmd == "LINSERT_AFTER_AT") { db.dLists[name].insert_after_at(stoi(val), val2); db.saveToFile(filename); }
         else if (cmd == "LINSERT_BEFORE_VAL") { db.dLists[name].insert_before_value(val, val2); db.saveToFile(filename); }
         else if (cmd == "LINSERT_AFTER_VAL") { db.dLists[name].insert_after_value(val, val2); db.saveToFile(filename); }
         else if (cmd == "LPOP_FRONT") { db.dLists[name].pop_front(); db.saveToFile(filename); }
         else if (cmd == "LPOP_BACK") { db.dLists[name].pop_back(); db.saveToFile(filename); }
-        else if (cmd == "LDEL_AT") { db.dLists[name].remove_at(stoi(val)); db.saveToFile(filename); }
         else if (cmd == "LDEL_VALUE") { db.dLists[name].remove_by_value(val); db.saveToFile(filename); }
         else if (cmd == "LDEL_ALL") { db.dLists[name].remove_all_by_value(val); db.saveToFile(filename); }
         else if (cmd == "LDEL_BEFORE") { db.dLists[name].remove_before_value(val); db.saveToFile(filename); }

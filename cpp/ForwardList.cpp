@@ -19,21 +19,6 @@ void ForwardList::push_back(const string& val) {
     size++;
 }
 
-void ForwardList::insert_before_at(int index, const string& val) {
-    if (index < 0 || index > size) throw out_of_range("Index out of range");
-    if (index == 0) { push_front(val); return; }
-    Node* cur = head;
-    for (int i = 0; i < index - 1; ++i) cur = cur->next;
-    Node* n = new Node(val); n->next = cur->next; cur->next = n; size++;
-}
-
-void ForwardList::insert_after_at(int index, const string& val) {
-    if (index < 0 || index >= size) throw out_of_range("Index out of range");
-    Node* cur = head;
-    for (int i = 0; i < index; ++i) cur = cur->next;
-    Node* n = new Node(val); n->next = cur->next; cur->next = n; size++;
-}
-
 void ForwardList::insert_before_value(const string& target, const string& val) {
     if (!head) return;
     if (head->data == target) { push_front(val); return; }
@@ -63,14 +48,6 @@ void ForwardList::pop_back() {
     Node* cur = head;
     while (cur->next->next) cur = cur->next;
     delete cur->next; cur->next = nullptr; size--;
-}
-
-void ForwardList::remove_at(int index) {
-    if (index < 0 || index >= size) throw out_of_range("Index out of range");
-    if (index == 0) { pop_front(); return; }
-    Node* cur = head;
-    for (int i = 0; i < index - 1; ++i) cur = cur->next;
-    Node* t = cur->next; cur->next = t->next; delete t; size--;
 }
 
 void ForwardList::remove_by_value(const string& val) {

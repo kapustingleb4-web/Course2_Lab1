@@ -22,26 +22,6 @@ void DoublyList::push_back(const string& val) {
     size++;
 }
 
-void DoublyList::insert_before_at(int index, const string& val) {
-    if (index < 0 || index > size) throw out_of_range("Index out of range");
-    if (index == 0) { push_front(val); return; }
-    Node* cur = head;
-    for (int i = 0; i < index; ++i) cur = cur->next;
-    Node* n = new Node(val);
-    n->prev = cur->prev; n->next = cur;
-    cur->prev->next = n; cur->prev = n; size++;
-}
-
-void DoublyList::insert_after_at(int index, const string& val) {
-    if (index < 0 || index >= size) throw out_of_range("Index out of range");
-    if (index == size - 1) { push_back(val); return; }
-    Node* cur = head;
-    for (int i = 0; i < index; ++i) cur = cur->next;
-    Node* n = new Node(val);
-    n->next = cur->next; n->prev = cur;
-    cur->next->prev = n; cur->next = n; size++;
-}
-
 void DoublyList::insert_before_value(const string& target, const string& val) {
     Node* cur = head;
     while (cur && cur->data != target) cur = cur->next;
@@ -74,16 +54,6 @@ void DoublyList::pop_back() {
     Node* t = tail; tail = tail->prev;
     if (tail) tail->next = nullptr; else head = nullptr;
     delete t; size--;
-}
-
-void DoublyList::remove_at(int index) {
-    if (index < 0 || index >= size) throw out_of_range("Index out of range");
-    if (index == 0) { pop_front(); return; }
-    if (index == size - 1) { pop_back(); return; }
-    Node* cur = head;
-    for (int i = 0; i < index; ++i) cur = cur->next;
-    cur->prev->next = cur->next; cur->next->prev = cur->prev;
-    delete cur; size--;
 }
 
 void DoublyList::remove_by_value(const string& val) {

@@ -165,12 +165,6 @@ func main() {
 	case "FPUSH_BACK":
 		getOrCreateF(db.ForwardLists, name).PushBack(val)
 		saveAndSay("FPUSH_BACK ok")
-	case "FINSERT_BEFORE_AT":
-		getOrCreateF(db.ForwardLists, name).InsertBeforeAt(atoi(val), tokens[3])
-		saveAndSay("FINSERT_BEFORE_AT ok")
-	case "FINSERT_AFTER_AT":
-		getOrCreateF(db.ForwardLists, name).InsertAfterAt(atoi(val), tokens[3])
-		saveAndSay("FINSERT_AFTER_AT ok")
 	case "FINSERT_BEFORE_VAL":
 		getOrCreateF(db.ForwardLists, name).InsertBeforeValue(val, tokens[3])
 		saveAndSay("FINSERT_BEFORE_VAL ok")
@@ -183,9 +177,6 @@ func main() {
 	case "FPOP_BACK":
 		getOrCreateF(db.ForwardLists, name).PopBack()
 		saveAndSay("FPOP_BACK ok")
-	case "FDEL_AT":
-		getOrCreateF(db.ForwardLists, name).RemoveAt(atoi(val))
-		saveAndSay("FDEL_AT ok")
 	case "FDEL_VALUE":
 		getOrCreateF(db.ForwardLists, name).RemoveByValue(val)
 		saveAndSay("FDEL_VALUE ok")
@@ -208,12 +199,6 @@ func main() {
 	case "LPUSH_BACK":
 		getOrCreateD(db.DoublyLists, name).PushBack(val)
 		saveAndSay("LPUSH_BACK ok")
-	case "LINSERT_BEFORE_AT":
-		getOrCreateD(db.DoublyLists, name).InsertBeforeAt(atoi(val), tokens[3])
-		saveAndSay("LINSERT_BEFORE_AT ok")
-	case "LINSERT_AFTER_AT":
-		getOrCreateD(db.DoublyLists, name).InsertAfterAt(atoi(val), tokens[3])
-		saveAndSay("LINSERT_AFTER_AT ok")
 	case "LINSERT_BEFORE_VAL":
 		getOrCreateD(db.DoublyLists, name).InsertBeforeValue(val, tokens[3])
 		saveAndSay("LINSERT_BEFORE_VAL ok")
@@ -226,9 +211,6 @@ func main() {
 	case "LPOP_BACK":
 		getOrCreateD(db.DoublyLists, name).PopBack()
 		saveAndSay("LPOP_BACK ok")
-	case "LDEL_AT":
-		getOrCreateD(db.DoublyLists, name).RemoveAt(atoi(val))
-		saveAndSay("LDEL_AT ok")
 	case "LDEL_VALUE":
 		getOrCreateD(db.DoublyLists, name).RemoveByValue(val)
 		saveAndSay("LDEL_VALUE ok")
